@@ -1,0 +1,40 @@
+(function () {
+  window._smReadyFuncs = [];
+  window.SMSdk = {
+    ready: function (fn) {
+      fn && _smReadyFuncs.push(fn);
+    },
+  };
+  // 1. 通用配置项
+  window._smConf = {
+    organization : '4YFoHEPuiFGuRr8EYLGz',
+    appId : 'hupu',
+    publicKey : 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFmJrNyUCo5J7gEtSaha4Y6Jm98MYh8PM4AVGNC1jS5VGpkA18fXnLCQSGARmn2/C0hwy4RjP6Hp++7QvCtlZkq2PdXbTZelGHYd2rFAsio38rK8VjU76SuyiRvi9sa7Hy4BZvxTIrm1n+IBR2te/yhI5taBZfm/80vi1iwU1N0wIDAQAB' ,
+    staticHost: 'static.portal101.cn' ,
+    protocol:'https'
+  };
+
+  var url = (function () {
+    var jsTimer = '?t=' + (new Date().getTime() / (6 * 3600 * 1000)).toFixed(0)
+
+    var originHost = 'static2.portal101.cn';
+    var isHttps = 'https:' === document.location.protocol;
+    var protocol = isHttps ? 'https://' : 'http://';
+    var fpJsPath = '/dist/web/v3.0.0/fp.min.js';
+    // var url = protocol + _smConf.staticHost + fpJsPath;
+    var url =  protocol + _smConf.staticHost + fpJsPath + jsTimer;
+    var ua = navigator.userAgent.toLowerCase();
+    var isWinXP = /windows\s(?:nt\s5.1)|(?:xp)/.test(ua);
+    var isLowIE = /msie\s[678]\.0/.test(ua);
+
+    if (isHttps && isWinXP && isLowIE) {
+      url = protocol + originHost + fpJsPath;
+    }
+
+    return url;
+  })();
+  var sm = document.createElement('script');
+  var s = document.getElementsByTagName('script')[0];
+  sm.src = url;
+  s.parentNode.insertBefore(sm, s);
+})();
