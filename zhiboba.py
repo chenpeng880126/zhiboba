@@ -64,6 +64,7 @@ if __name__ == '__main__':
     r = requests.get(url, headers=headers)
     analysis_zhiboba(r.json(), t1_datetime)
 
+    #test
     '''
     with open('data/zhiboba1', "w+", encoding="utf-8") as f:
         f.write(str(r.json()))
