@@ -97,8 +97,7 @@ def analysis_data(all_post):
     print(all_post)
 
 
-if __name__ == '__main__':
-
+def get_502_hot():
     t1 = "02-16 13:27"
     t1_datetime = datetime.datetime.strptime(t1, "%m-%d %H:%M")
     url1 = "https://bbs.hupu.com/502-hot"
@@ -109,30 +108,20 @@ if __name__ == '__main__':
         post_detail = get_article_data(get_page(p_href))
         p.update(post_detail)
         time.sleep(2)
-        print("%s,%s,%s,%s,%s" % (p['p_time'],p['p_title'],p['r_v_rate'],p['tj'],p['p_href']))
-
-    #print(all_post)
+        print("%s,%s,%s,%s,%s" % (p['p_time'], p['p_title'], p['r_v_rate'], p['tj'], p['p_href']))
 
 
-    #url2 = "D:/Python_Study/zhiboba/data/test4_2.html"
-    #print(get_article_data_test(url2))
+def get_502_postdate():
+    t1 = "02-01 00:00"
+    t1_datetime = datetime.datetime.strptime(t1, "%m-%d %H:%M")
+    url1 = "https://bbs.hupu.com/502-postdate"
+    all_post = get_hot_data(get_page(url1), t1_datetime)
+    all_post.sort(key=lambda s: s['p_time'], reverse=True)
+    for p in all_post:
+        print("%s,%s,%s,%s,%s" % (p['p_time'], p['p_title'], p['r_v_rate'], p['v_quantity'], p['p_href']))
 
-    #url1 = "D:/Python_Study/zhiboba/data/test3.html"
-    #all_post = get_page_data_test(url1, t1_datetime)
 
+if __name__ == '__main__':
+    get_502_postdate()
+    #get_502_hot()
 
-   #analysis_data(all_post)
-    #compare_time()
-
-    #s1 = get_page(url1)
-    #with open("data/test2.html", "w", encoding="utf-8") as f:
-    #    f.write(s1.text)
-    '''
-    response = requests.get(url1)
-    with open("data/test1.html", "w", encoding="utf-8") as f:
-        f.write(response.text)
-        
-    '''
-    #print("ok")
-    #hupu_url = "https://bbs.hupu.com/57932440.html"
-    #print(get_page(hupu_url))
