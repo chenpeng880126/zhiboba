@@ -56,13 +56,15 @@ def analysis_zhiboba(json_obj, end_time):
 
 
 if __name__ == '__main__':
-    t1 = "2023-02-16 15:58:29"
-    t1_datetime = datetime.datetime.strptime(t1, "%Y-%m-%d %H:%M:%S")
+    t_6 = datetime.datetime.now() + datetime.timedelta(hours=-6)
+    print(t_6)
+    #t1 = "2023-03-08 05:58:29"
+    #t1_datetime = datetime.datetime.strptime(t1, "%Y-%m-%d %H:%M:%S")
     url = 'https://m.zhibo8.cc/json/hot/24hours.htm'
     headers = {
         'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}
     r = requests.get(url, headers=headers)
-    analysis_zhiboba(r.json(), t1_datetime)
+    analysis_zhiboba(r.json(), t_6)
 
     #test1
     '''
@@ -72,5 +74,5 @@ if __name__ == '__main__':
         news24_json = json.loads(f.read(), encoding="utf-8")
         #for k in news24_json:
         #    print(k)
-        analysis_zhiboba(news24_json, t1_datetime)
+        analysis_zhiboba(news24_json, t_6)
     '''
